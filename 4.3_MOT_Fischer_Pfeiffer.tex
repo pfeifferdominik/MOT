@@ -6,6 +6,7 @@
 \usepackage{hyperref}
 \usepackage{units}
 \usepackage{upgreek}
+\usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage[figure]{hypcap}
@@ -74,6 +75,8 @@ Im Versuch kommen für die Stabilisierung der beiden Laser s.g. PID-Regler zum E
 \item[D]: Der $\textbf{D}$ifferentierende Teil gibt eine Regelgröße aus, die über die Ableitung der Abweichung von $x_i$ gegenüber $x_s$ nach der Zeit ermittelt wird. Da er dabei die Geschwindigkeit der Änderung der Abweichung verwendet reagiert er sehr schnell, erkennt jedoch zeitlich konstante Abweichungen nicht.
 \end{itemize}
 Die Kombination der drei Einzelmodule macht den PID-Regler zu einem schnellen und effizienten Regler, weshalb er bei diesem Versuch für die Laserstabilisierung eingesetzt wird.
+\subsection{Faraday-Isolator}
+$\cdots$
 \section{Theorie zur Laserstabilisierung}
 Um in einer MOT Atome Fangen und Kühlen zu können, benötigt man verschiedene Lasersysteme. In diesem Versuch kommen zwei Halbleiter-Dioden-Laser zum Einsatz. Einer ist dafür verantwortlich, die Atome kühlen (Kühllaser), der andere sorgt dafür, das die Atome sich einem zum Kühlen geeigneten Atomaren Zustand befinden (Rückpumplaser).\\
 Beide Laser sind in einem in einem Aufbau mit einem externen Resonator verbaut, was eine schnelle und präzise Korrektur der Wellenlänge möglich macht. Diese schnelle Korrektur ist von Nöten, da die beiden Laser so stabil wie möglich auf einem bestimmten Atomaren Übergang laufen sollen um die MOT stabil zu halten, effektiv zu Kühlen und Rückzupumpen. Der Rückpumplaser ist dabei in der s.g. Littman-Anordnung verbaut. Bei dieser besteht der Resonator aus der Rückseite der Diode und einem Externen Auskopplungsspiegel, welcher über einen Piezo-Motor in verstellt werden kann. Über diesen kann die Resonatorlänge und damit die Wellenlänge des Lasers eingestellt werden. Der Kühllaser ist in der Littrow-Anordnung verbaut, bei der ein Reflexionsgitter als ein Teil des Resonators fungiert. Die (-1)-Beugungsordnung des Gitters wird dabei in die Diode zurückreflekiert un die (0)-Ordnung ausgekoppelt. Hierüber findet die Wellenlängenselektion statt. Auch das Gitter wird über einen Piezo-Motor in seiner Orientierung gegenüber der Diode verstellt um so den Laser stabil auf der gewünschten Wellenlänge zu halten.\\
@@ -101,10 +104,10 @@ Zunächst müssen die Laser so stabilisiert werden, dass die MOT effizient arbei
 \begin{figure}[H]
   \centering
   \subfloat[Enger Ausschnitt des Spektroskopiesignals - Datenpunkte und Durchschnitt]{\label{spek1}
-    \includegraphics[width=0.45\textwidth]
+    \includegraphics[width=0.48\textwidth]
     {graphics/spek1.pdf}}\quad
   \subfloat[Weiter Ausschnitt des Spektroskopiesignals - Datenpunkte und Durchschnitt]{\label{spek2}
-    \includegraphics[width=0.45\textwidth]
+    \includegraphics[width=0.48\textwidth]
     {graphics/spek2.pdf}}\quad
   \caption{Bei der dopplerfreien Sättigungsspektroskopie aufgenommene Spektren - Datenpunkte und Durchschnitt aufgetragen über der Spannung am Piezomotor}
   \label{spektren}
@@ -113,10 +116,10 @@ Um den Rückpumplaser zu stabilisieren wurde das Dispersionssignal, was dem von 
 \begin{figure}[H]
   \centering
   \subfloat[Flanke des Dispersionssignals - Datenpunkte und Durchschnitt]{\label{flanke}
-    \includegraphics[width=0.45\textwidth]
+    \includegraphics[width=0.48\textwidth]
     {graphics/flanke.pdf}}\quad
   \subfloat[Offsetsignal - Datenpunkte und Durchschnitt]{\label{offset}
-    \includegraphics[width=0.45\textwidth]
+    \includegraphics[width=0.48\textwidth]
     {graphics/ofset.pdf}}\quad
   \caption{Die Datenpunkte und Durchschnitte der Flanke des Dispersionssignals sowie des Offsetsignals aufgetragen über der Spannung am Piezomotor}
   \label{fldis}
@@ -137,8 +140,41 @@ f(t)=A\cdot\left(1-\exp\left(-\beta\cdot t\right)\right) + B
 \end{equation}
 ,wobei A die Amplitude, $\beta$ ein Dämpfungsfaktor und B ein zeitlich konstantes Offset (Hintergrund-Streulicht) darstellen, konnte diese Entscheidung im Nachhinein bestätigt werden. Es ergaben sich $A=3,75\cdot 10^6 \pm 1$, $\beta=0,107\pm 0 \frac{1}{s}$ und $B=3,96\cdot 10^6 \pm 1$ und damit ein Sättigungswert von $\approx7,7\cdot 10^6$. Nach $t_{Lade}=15\,\si{s}$ wurden 91,3\% des Sättigungswertes erreicht.
 \section{Temperaturbestimmung in der MOT}
+Um die Temperatur des Atomensembles in der MOT bzw. in der optischen Melsasse der MOT zu bestimmen gehen wir wie folgt vor:
+\begin{itemize}
+\item[1)] Zunächst werden die Pixelwerte der Bilder entlang einer Bildachse aufsummiert. Bei der Auswertung konnte dies nur entlang der vertikalen Bildachse als sinnvoll erachtet werden, da sich aufgrund des Störlichts im unteren Linken Eck der aufgenommenen Bilder entlang der horizontalen Bildachse keine Struktur des Atomensembles aus dem Störlicht filtern lies.
+\item[2)] Im nächsten Schritt wird eine Gauss-Funktion über die Verteilung gelegt, deren x-Achse über die Angabe, dass ein Pixel eine Breite von $b_{Pixel}=6,7\,\si{\mu m}$ hat in Meter umgerechnet wurde. An die Pixelwertverteilungen der Bilder wurde die Funktion
+\begin{equation}
+f(x)=A\cdot\exp\left(-\frac{(x-x_0)^2}{2\sigma^2}\right) +B 
+\end{equation}
+angepasst. Dieser Schritt wurde für jedes der Einzelbilder der Messreihen durchgeführt.
+\item[3)] Das Ensemble der $\isotope[85]{Rb}$-Atome kann hinsichtlich seiner Geschwindigkeit über die Maxwell-Boltzmann-Verteilung beschrieben werden. Diese ist gegeben durch:
+\begin{equation}
+f_{MB}(v_x)=4\pi v^2\cdot C\cdot\exp\left(-\frac{mv_x^2}{2k_BT}\right)
+\end{equation}
+\item[4)] Durch einen Vergleich der Exponenten und ausnutzen der Tatsache, das gilt $v_x=\frac{x-x_0}{t}$ ergibt sich
+\begin{align}
+\rightarrow\frac{(x-x_0)^2}{2\sigma^2}&=\frac{mv_x^2}{2k_BT}\\
+\leftrightarrow\sigma^2&=\frac{k_BT}{m}\cdot t^2
+\end{align}
+Trägt man also nun die sich aus den Gauss-Fits ergebenden $\sigma^2$-Werte über dem Quadrat der zugehörigen Flugzeit $t_{Flug}$ auf, so erhält man im Idealfall eine Gerade, aus deren Steigung sich die Temperatur des Atomensembles über $T=\frac{m_{Gerade}\cdot m_{Atom}}{k_B}$ berechnen lässt.
+\end{itemize}
 \subsection{Temperatur der MOT}
+\begin{figure}[H]
+\centering
+   	\begin{minipage}[b]{0.85\textwidth}
+   	\includegraphics[width=\textwidth]{graphics/tempmot.pdf}\
+   	\end{minipage}
+\caption{Aufgetragen sind die $\sigma^2$-Werte über dem quadtrierten Wert der Flugzeit $t_{Flug}^2$ aus den Gaussfits an die Pixeldaten aus der Bildreihe zur Bestimmung der Temperatur in der MOT}\label{tmot}	
+\end{figure}
 \subsection{Temperatur in der optischen Melasse}
+\begin{figure}[H]
+\centering
+   	\begin{minipage}[b]{0.85\textwidth}
+   	\includegraphics[width=\textwidth]{graphics/tempmel.pdf}\
+   	\end{minipage}
+\caption{Aufgetragen sind die $\sigma^2$-Werte über dem quadtrierten Wert der Flugzeit $t_{Flug}^2$ aus den Gaussfits an die Pixeldaten aus der Bildreihe zur Bestimmung der Temperatur in der optischen Melasse der MOT}\label{tmel}	
+\end{figure}
 \chapter{Diskussion}
 \chapter{Messdaten}
 
