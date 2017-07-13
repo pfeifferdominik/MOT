@@ -64,8 +64,6 @@ Im Versuch kommen für die Stabilisierung der beiden Laser s.g. PID-Regler zum E
 \item[D]: Der $\textbf{D}$ifferentierende Teil gibt eine Regelgröße aus, die über die Ableitung der Abweichung von $x_i$ gegenüber $x_s$ nach der Zeit ermittelt wird. Da er dabei die Geschwindigkeit der Änderung der Abweichung verwendet reagiert er sehr schnell, erkennt jedoch zeitlich konstante Abweichungen nicht.
 \end{itemize}
 Die Kombination der drei Einzelmodule macht den PID-Regler zu einem schnellen und effizienten Regler, weshalb er bei diesem Versuch für die Laserstabilisierung eingesetzt wird.
-\subsection{Faraday-Isolator}
-$\cdots$
 \section{Theorie zur Laserstabilisierung}
 Um in einer MOT Atome Fangen und Kühlen zu können, benötigt man verschiedene Lasersysteme. In diesem Versuch kommen zwei Halbleiter-Dioden-Laser zum Einsatz. Einer ist dafür verantwortlich, die Atome kühlen (Kühllaser), der andere sorgt dafür, das die Atome sich einem zum Kühlen geeigneten Atomaren Zustand befinden (Rückpumplaser).\\
 Beide Laser sind in einem in einem Aufbau mit einem externen Resonator verbaut, was eine schnelle und präzise Korrektur der Wellenlänge möglich macht. Diese schnelle Korrektur ist von Nöten, da die beiden Laser so stabil wie möglich auf einem bestimmten Atomaren Übergang laufen sollen um die MOT stabil zu halten, effektiv zu Kühlen und Rückzupumpen. Der Rückpumplaser ist dabei in der s.g. Littman-Anordnung verbaut. Bei dieser besteht der Resonator aus der Rückseite der Diode und einem Externen Auskopplungsspiegel, welcher über einen Piezo-Motor in verstellt werden kann. Über diesen kann die Resonatorlänge und damit die Wellenlänge des Lasers eingestellt werden. Der Kühllaser ist in der Littrow-Anordnung verbaut, bei der ein Reflexionsgitter als ein Teil des Resonators fungiert. Die (-1)-Beugungsordnung des Gitters wird dabei in die Diode zurückreflekiert un die (0)-Ordnung ausgekoppelt. Hierüber findet die Wellenlängenselektion statt. Auch das Gitter wird über einen Piezo-Motor in seiner Orientierung gegenüber der Diode verstellt um so den Laser stabil auf der gewünschten Wellenlänge zu halten.\\
@@ -85,7 +83,42 @@ Zu einer s.g. Crossover-Resonanz (COF) und kann es kommen, wenn der Laser genau 
 Der Laser soll auf den $F=2\rightarrow F'=1$ Übergang stabilisiert werden. Hierfür wird der Rückpumplaser durch eine Dreiecksspannung am Piezomotor des externen Resonators in seiner Frequenz durchgestimmt und das Signal der Photodiode zunächst elektronisch abgeleitet. Ein Maximum der Intensität auf der Photodiode hat dadurch einen Nulldurchgang, auf den Der PID-Regler stabilisieren kann. 
 \subsection{Offsetlock}
 Der eigentliche Kühllaser wird mittels Offsetlock gegenüber dem Rückpumplaser stabilisiert und dabei dessen Stabilisierung auf einen Atomaren Übergang genutzt. Beim Offsetlock werden die beiden Laserstrahlen überlagert auf einer Photodiode abgebildet, wodurch sich ein Schwebungssignal ergibt. Dieses wird elektronisch in eine Gleichspannung umgewandelt (und vorher mit $\frac{1}{16}$ multipliziert) und auf einer Anzeige dargestellt. Im Versuch wurde für die MOT ein Offset von $f_{Offset}=2920\,\si{MHz}$ eingestellt.
-\section{Theorie zur MOT}\label{theorie} 	
+\section{Theorie zur MOT}\label{theorie} 
+\subsection{Spontankraft}
+Das Phänomen der Spontankraft bezeichnet die gerichtete Kraft, die Auftritt, wenn man ein Atom aus einer Richtung mit der Anregungsfrequenz eines Übergangs anstrahlt, wodurch das Atom Impuls durch den Rückstoß aufnimmt. Die Abregung und Abstrahlung von Photonen erfolgt isotrop, dadurch ist der Impuls durch den Rückstoß der Emission im Mittel Null. Damit resultiert eine Beschleunigung weg vom Laser.
+\subsection{Dopplerkühlung}
+Da die Temperatur über $ T=mv^2/k_\text{B}f $ mit der Geschwindigkeit der Atome zusammen hängt muss für eine Kühlung eine Entschleunigung der Teilchen erreicht werden. Bei der Dopplerkühlung nutzt man die Spontankraft, nur strahlt man die Anregungsfrequenz rotverstimmt ein, sodass gerade die Atome die sich auf den Laser zu bewegen abgebremst werden, da in deren Inertialsystem die Laserfrequenz zur Anregungsfrequenz hin dopplerverschoben ist. Betrachtet man die Kühlung eindimensional, erkennt man leicht, dass eine Einstrahlung aus beiden Richtungen zu einer Abbremsung aller Atome führt. Die resultierende Kraft ist proportional zur Geschwindigkeit $ v $ der Atome
+\begin{equation}
+F= -\beta v
+\end{equation}
+mit einer Übergangsspezifischen Konstanten $ \beta $ \cite{anl} und die minimal mit dieser Methode erreichbare Temperatur, das Dopplerlimit $ T_\text{D} $ ist
+\begin{equation}
+T_\text{D}=\frac{\hbar\Gamma}{2k_\text{B}}
+\end{equation}
+wobei $ \Gamma $ die Zerfallsrate des angeregten Zustandes ist.
+\subsection{Subdopplerkühlung}
+Experimentell stellt man fest, dass man jedoch Temperaturen unterhalb des Dopplerlimits erreichen kann. Dies liegt daran, dass es im elektrischen Feld zu einer Aufspaltung des Grundniveaus kommt (Stark-Effekt). Die Größe der Aufspaltung hängt von der Polarisation ab. Betrachtet man zwei entgegenlaufende, sich überlagernde, linear polarisierte EM-Wellen $ \vec{E}_{1,2}=E_0\vec{e}_x\cdot \exp\left(i\left(\pm kx-\omega t\right)\right)+k.k. $ stellt man fest, dass es sich eine Ortsabhängige Polarisation ergibt (siehe Abbildung \ref{fig:subdoppler}).
+\begin{figure}[H]
+\centering
+   	\begin{minipage}[b]{.5\textwidth}
+   	\includegraphics[width=\textwidth]{graphics/subdoppler.png}\
+   	\end{minipage}
+\caption{Die Aufspaltung des Grundzustandes auf Grund des Stark-Effekts \cite{subdoppler}}\label{fig:subdoppler}	
+\end{figure}
+Die Atome im oberen Niveau werden gepumpt und fallen in das untere zurück und verlieren dabei Energie. Dadurch werden Temperaturen unterhalb des Dopplerlimits erreicht.
+\subsection{Fangen von Atomen}
+Um die Atome zu fangen legt man ein inhomogenes Magnetfeld mit einem Quadrupol an. Dieses ist nahe der Fallenmitte linear im Ort: $ B=B_0\cdot x $. Damit ist auch die Zeeman-Aufspaltung abhängig vom Ort (siehe Abbildung \ref{fig:zeeman}).
+\begin{figure}[H]
+\centering
+   	\begin{minipage}[b]{.5\textwidth}
+   	\includegraphics[width=\textwidth]{graphics/zeeman.pdf}\
+   	\end{minipage}
+\caption{Die Aufspaltung des Anregungszustandes auf Grund des Zeeman-Effekts im Quadrupolfeld \cite{anl}}\label{fig:zeeman}	
+\end{figure}
+Verlässt zum Beispiel ein Atom die Falle nach rechts, so kann es ein $ \sigma^- $-Photon aufnehmen, da das $ m_{F'}=-1 $ Niveau durch das Magnetfeld an die Anregungsfrequenz heranrückt. Dadurch werden die Atome in die Fallenmitte gelenkt. Die Kraft gleicht der eines gedämpften harmonischen Oszillators:
+\begin{equation}
+F=-\beta v_x-\kappa x\qquad\cite{anl}
+\end{equation}
 \chapter{Versuchsdurchführung und Auswertung}
 In den Folgenden Kapitel wird sowohl die Durchführung, welche sich nach der Anleitung \cite{anl} richtet, als auch die Auswertung dargestellt. Zunächst wurde die Stabilisierung des Lasersystems durchgeführt und die Ladephase der MOT überprüft. Danach wurden zwei Messreihen an Bildern aufgenommen um die Temperatur der MOT und der optischen Melasse zu ermitteln.
 \section{Stabilisierung des Lasersystems}
@@ -186,7 +219,8 @@ Durch die Aufnahme von Bildern nach bestimmten Flugzeiten und der Auswertung der
 \renewcommand{\bibname}{Literaturverzeichnis}
 \begin{thebibliography}{Bak89}
 \bibitem {anl} Anleitung zum Versuch 4.3: MOT, (Stand 26.06.2017)
-\bibitem {limit} http://steck.us/alkalidata/rubidium85numbers.pdf, (Zugriff: 12.07.2017)
+\bibitem {limit} \url{http://steck.us/alkalidata/rubidium85numbers.pdf}, (Zugriff: 12.07.2017)
+\bibitem {subdoppler} \url{http://www.iap.tu-darmstadt.de/tqp/grp_kranade/ExpSeminar.pdf}, (Zugriff: 12.02.2017)
 
 
 \end{thebibliography} 	
