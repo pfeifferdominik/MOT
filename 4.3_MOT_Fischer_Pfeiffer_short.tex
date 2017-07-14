@@ -86,7 +86,7 @@ Der eigentliche Kühllaser wird mittels Offsetlock gegenüber dem Rückpumplaser
 \section{Theorie zur MOT}\label{theorie} 
 \subsection{Spontankraft}
 Das Phänomen der Spontankraft bezeichnet die gerichtete Kraft, die Auftritt, wenn man ein Atom aus einer Richtung mit der Anregungsfrequenz eines Übergangs anstrahlt, wodurch das Atom Impuls durch den Rückstoß aufnimmt. Die Abregung und Abstrahlung von Photonen erfolgt isotrop, dadurch ist der Impuls durch den Rückstoß der Emission im Mittel Null. Damit resultiert eine Beschleunigung weg vom Laser.
-\subsection{Dopplerkühlung}
+\subsection{Dopplerkühlung}\label{subsec:doppler}
 Da die Temperatur über $ T=mv^2/k_\text{B}f $ mit der Geschwindigkeit der Atome zusammen hängt muss für eine Kühlung eine Entschleunigung der Teilchen erreicht werden. Bei der Dopplerkühlung nutzt man die Spontankraft, nur strahlt man die Anregungsfrequenz rotverstimmt ein, sodass gerade die Atome die sich auf den Laser zu bewegen abgebremst werden, da in deren Inertialsystem die Laserfrequenz zur Anregungsfrequenz hin dopplerverschoben ist. Betrachtet man die Kühlung eindimensional, erkennt man leicht, dass eine Einstrahlung aus beiden Richtungen zu einer Abbremsung aller Atome führt. Die resultierende Kraft ist proportional zur Geschwindigkeit $ v $ der Atome
 \begin{equation}
 F= -\beta v
@@ -181,7 +181,7 @@ f_{MB}(v_x)=4\pi v^2\cdot C\cdot\exp\left(-\frac{mv_x^2}{2k_BT}\right)
 \end{align}
 Trägt man also nun die sich aus den Gauss-Fits ergebenden $\sigma^2$-Werte über dem Quadrat der zugehörigen Flugzeit $t_{Flug}$ auf, so erhält man im Idealfall eine Gerade, aus deren Steigung sich die Temperatur des Atomensembles über $T=\frac{m_{Gerade}\cdot m_{Atom}}{k_B}$ berechnen lässt.
 \end{itemize}
-\subsection{Temperatur der MOT}
+\subsection{Temperatur der MOT}\label{subsec:tempMOT}
 Um die Temperatur des Atomensembles in der MOT ohne eine optische Melasse zu bestimmen, wurde zunächst die Ladezeit auf $t_{Lade}=15\,\si{s}$ eingestellt, die Zeit der optischen Melasse auf $t_{Melasse}=0\,\si{s}$ und dann eingestellt. Um nun die Temperatur bestimmen zu können wird nach Ende der Ladephase die Flugzeit der Atome in $0,250\,\si{\ms}$ Schritten von $0-5\,\si{ms}$ erhöht und nach Ablauf der Zeit ein Bild des Ensembles aufgenommen. Da bereits nach einer Flugzeit von nur $2,5\,\si{ms}$ auf den Bildern das Atomensemble nicht mehr erkennbar war und das Streulicht überwog, wurde die Messung beendet. Der Zyklus "`Laden-Flugphase-Bild"' wurde für jede Flugzeit vier mal durchgeführt und die Bilder zu einem gemittelt. Nach der oben beschriebenen Methode wurden dann die $(t_{Flug}^2,\sigma^2)$ Wertepaare aufgetragen und eine Ausgleichsgerade angepasst. in Abbildung \ref{tmot} Sind sowohl die Wertepaare, als auch die Ausgleichsgerade zu sehen.
 \begin{figure}[H]
 \centering
@@ -191,13 +191,18 @@ Um die Temperatur des Atomensembles in der MOT ohne eine optische Melasse zu bes
 \caption{Aufgetragen sind die $\sigma^2$-Werte über dem quadtrierten Wert der Flugzeit $t_{Flug}^2$ aus den Gaussfits an die Pixeldaten aus der Bildreihe zur Bestimmung der Temperatur in der MOT}\label{tmot}	
 \end{figure}
 Anhand der Steigung dieser Ausgleichsgeraden konnte die Temperatur des Atomensembles zu 
-\begin{equation}
-T_{MOT}=628,43\pm 15\cdot 10^{8}\,\si{\mu K}
+\begin{equation}\label{eq:tempMOT}
+T_{MOT}=628,43\pm 97.98\,\si{\mu K}
 \end{equation}
-Bestimmt werden. Der sehr große Fehler dieses Wertes ist durch das Fitten der Ausgleichsgeraden an die Datenpunkte gegeben. Da diese wie in Abbildung \ref{tmot} gut zu erkennen aber eine große Streuung aufweisen, ergibt sich eine große Schar an möglichen Ausgleichsgeraden, was wiederum den Fehler der Parameter vergrößert.\\
-Des Weiteren konnte das Dopplerlimit von $T_{DL}=145,47\,\si{\mu K}$ \cite{limit} nicht sehr deutlich nicht erreicht werden. Dies kann mehrerer Ursachen haben. Zunächst ist es möglich, dass eine Ungenauigkeit im Lasersystem dazu geführt hat, dass der Kühllaser nicht optimal stabilisiert war bzw. nicht auf den korrekten Wert um das Ensemble effizient zu Kühlen. Weiter fallen die großen Ladezahlen auf, welche dafür Sprechen, dass die MOT einwandfrei funktioniert hat, jedoch die Kühlzeit aufgrund des großen Atomensembles nicht ausreichte um dieses bis an das Dopplerlimit zu kühlen.\\
+bestimmt werden.\\
+Des Weiteren konnte das Dopplerlimit von $T_{DL}=145,47\,\si{\mu K}$ \cite{limit} nicht erreicht werden. Dies kann mehrerer Ursachen haben. Zunächst ist es möglich, dass eine Ungenauigkeit im Lasersystem dazu geführt hat, dass der Kühllaser nicht optimal stabilisiert war bzw. nicht auf den korrekten Wert um das Ensemble effizient zu Kühlen. Weiter fallen die großen Ladezahlen auf, welche dafür Sprechen, dass die MOT einwandfrei funktioniert hat, jedoch die Kühlzeit aufgrund des großen Atomensembles nicht ausreichte um dieses bis an das Dopplerlimit zu kühlen.\\
 Im letzten Teil des Versuches soll nun eine optische Melasse untersucht werden und ebenfalls die Temperatur des Ensembles bestimmt werden.
 \subsection{Temperatur in der optischen Melasse}
+Auf Gleiche Weise wie in Kapitel \textit{\nameref{subsec:tempMOT}} wurde auch hier eine Folge von Bilder der gefangenen Atome aufgenommen, nur dass nun zusätzlich für 7 ms das Magnetfeld ausgeschaltet wird (Melassephase). Die Auswertung folgt dem gleiche Schema wie in Kapitel \ref{subsec:tempMOT}. Die Ausgleichsgerade ist in Abbildung \ref{tmel} dargestellt. Aus der Steigung ergibt sich eine Temperatur von
+\begin{equation}
+T_{\text{mel}}=584,66 \pm 55.70\,\mu \si{K}
+\end{equation}
+Die Temperatur liegt unter der der MOT (\ref{eq:tempMOT}), da die Atome in den 7 ms dopplergekühlt werden (siehe Kapitel \ref{subsec:doppler}).
 \begin{figure}[H]
 \centering
    	\begin{minipage}[b]{0.85\textwidth}
@@ -208,23 +213,15 @@ Im letzten Teil des Versuches soll nun eine optische Melasse untersucht werden u
 \chapter{Diskussion}
 Anhand dieses Versuches konnten einige bemerkenswerte physikalische Vorgänge eindrucksvoll Betrachtet und überprüft werden. Zunächst wurde erfolgreich das Lasersystem der MOT stabilisiert. Hierfür kamen zwei Methoden zum Einsatz, zum einen die dopplerfreie Sättigungsspektroskopie für den Rückpumplaser und auf Grundlage dessen zum anderen der Offsetlock des Kühllasers gegenüber dem Rückpumplaser.\\
 Nach der Stabilisierung des Lasersystems wurde die ordnungsgemäße Funktion der MOT und der Ladeprozess überprüft. Anhand der Bilddaten und Augenmaß, sowie in Rücksprache mit dem Betreuer wurde sich für eine Ladezeit von $t_{Lade}=15\,\si{s}$ entschieden. Im Laufe der Auswertung konnte diese Entscheidung bestätigt werden, da die MOT nach $15\,\si{s}$ bereits 91,3\% des berechneten Sättigungswertes erreicht.\\
-Durch die Aufnahme von Bildern nach bestimmten Flugzeiten und der Auswertung der durch die Pixeldaten der Bilder berechneten örtlichen Verteilung des Atomensembles konnte die Temperatur der MOT ohne optische Melasse zu $T_{MOT}=628,43\pm 15\cdot 10^{8}\,\si{\mu K}$ bestimmt werden. Hierbei ist der Fehler aufgrund der Ausgleichsgerade und der großen Streuung der Daten sehr groß. Des Weiteren konnte das Dopplerlimit für $\isotope[85]{Rb}$ nicht erreicht werden. Ein offensichtlicher Grund hierfür konnte nicht gefunden werden, jedoch ist ein solcher experimenteller Aufbau extrem empfindlich gegenüber äußeren Störungen, sodass eine ungenügende Justage oder eine eventuelle "`Überlladung"' der MOT mögliche Ursachen sein könnten. 
-
-
-
-
-
-		
+Durch die Aufnahme von Bildern nach bestimmten Flugzeiten und der Auswertung der durch die Pixeldaten der Bilder berechneten örtlichen Verteilung des Atomensembles konnte die Temperatur der MOT ohne optische Melasse zu $T_{MOT}=628,43\pm 97.98\,\si{\mu K}$ bestimmt werden. Des Weiteren konnte das Dopplerlimit für $\isotope[85]{Rb}$ nicht erreicht werden. Ein offensichtlicher Grund hierfür konnte nicht gefunden werden, jedoch ist ein solcher experimenteller Aufbau extrem empfindlich gegenüber äußeren Störungen, sodass eine ungenügende Justage oder eine eventuelle \glqq Überladung\grqq\, der MOT mögliche Ursachen sein könnten.\\
+Gleiches gilt auch für die Temperatur der Melassephase $ T_{\text{mel}}=584,66 \pm 55.70\,\mu \si{K} $. Diese liegt jedoch wie erwartet unter der Temperatur der MOT ohne optische Melasse.
 
 \renewcommand{\bibname}{Literaturverzeichnis}
 \begin{thebibliography}{Bak89}
 \bibitem {anl} Anleitung zum Versuch 4.3: MOT, (Stand 26.06.2017)
-\bibitem {limit} \url{http://steck.us/alkalidata/rubidium85numbers.pdf}, (Zugriff: 12.07.2017)
-\bibitem {subdoppler} \url{http://www.iap.tu-darmstadt.de/tqp/grp_kranade/ExpSeminar.pdf}, (Zugriff: 12.02.2017)
-
+\bibitem {limit} \url{http://steck.us/alkalidata/rubidium85numbers.pdf}, \\(Zugriff: 12.07.2017)
+\bibitem {subdoppler} \url{http://www.iap.tu-darmstadt.de/tqp/grp_kranade/ExpSeminar.pdf}, \\(Zugriff: 12.02.2017)
 
 \end{thebibliography} 	
-
-
 
 \end{document} 
