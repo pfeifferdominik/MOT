@@ -181,6 +181,27 @@ f_{MB}(v_x)=4\pi v^2\cdot C\cdot\exp\left(-\frac{mv_x^2}{2k_BT}\right)
 \end{align}
 Trägt man also nun die sich aus den Gauss-Fits ergebenden $\sigma^2$-Werte über dem Quadrat der zugehörigen Flugzeit $t_{Flug}$ auf, so erhält man im Idealfall eine Gerade, aus deren Steigung sich die Temperatur des Atomensembles über $T=\frac{m_{Gerade}\cdot m_{Atom}}{k_B}$ berechnen lässt.
 \end{itemize}
+Folgende Abbildungen zeigen sowohl eines der originalen Bilder der CCD-Kamera, welches aus vier einzelnen, zur Rauschunterdrückung übereinandergelegten Bildern besteht. Die Pixelwerte dieser Bilder sind Grundlage der kompletten Auswertung. Da das Bild nur sehr schwach ist, wurde es zusätzlich in Falschfarben geplottet, um die Umrisse des Atomensembles besser erkennen zu können, sowie das Störlicht am unteren linken Eck.
+\begin{figure}[H]
+  \centering
+  \subfloat[Plot der Pixelwerte in Falschfarben zur besseren Veranschaulichung]{\label{falsch}
+    \includegraphics[width=0.48\textwidth]
+    {graphics/0_75ms_heatmap.pdf}}\quad
+  \subfloat[Originalbild der CCD-Kamera, welches für die Temperaturbestimmung in der optischen Melasse verwendet wurde.]{\label{original}
+    \includegraphics[width=0.48\textwidth]
+    {graphics/3.pdf}}\quad
+  \caption{Originalbild der CCD-Kamera und Plot der Pixelwerte in Falschfarben nach einer Flugzeit von $t_{Flug}=0,75\,\si{ms}$ in der optischen Melasse}
+  \label{falori}
+\end{figure}
+Die entlang der vertikalen Achse aufsummierten Pixeldaten ergeben die räumliche Verteilung des Ensembles in horizontaler Richtung an welche die Gaussfunktionen angepasst wurden. Dies ist Beispielhaft für das obige Bild hier dargestellt:
+\begin{figure}[H]
+\centering
+   	\begin{minipage}[b]{0.85\textwidth}
+   	\includegraphics[width=\textwidth]{graphics/0_75ms.pdf}\
+   	\end{minipage}
+\caption{Horizontale räumliche Verteilung des Ensemlbes in der optischen Melasse nach einer Flugzeit von $t_{Flug}=0,75\,\si{ms}$ zusammen mit dem Fit der Gausfunktion. Die Entfernung auf der x-Achse beziehen sich dabei auf das Bild und nicht auf einen fixen Nullpunkt innerhalb des MOT-Gehäuses.}\label{075fit}	
+\end{figure}
+\newpage
 \subsection{Temperatur der MOT}\label{subsec:tempMOT}
 Um die Temperatur des Atomensembles in der MOT ohne eine optische Melasse zu bestimmen, wurde zunächst die Ladezeit auf $t_{Lade}=15\,\si{s}$ eingestellt, die Zeit der optischen Melasse auf $t_{Melasse}=0\,\si{s}$ und dann eingestellt. Um nun die Temperatur bestimmen zu können wird nach Ende der Ladephase die Flugzeit der Atome in $0,250\,\si{\ms}$ Schritten von $0-5\,\si{ms}$ erhöht und nach Ablauf der Zeit ein Bild des Ensembles aufgenommen. Da bereits nach einer Flugzeit von nur $2,5\,\si{ms}$ auf den Bildern das Atomensemble nicht mehr erkennbar war und das Streulicht überwog, wurde die Messung beendet. Der Zyklus "`Laden-Flugphase-Bild"' wurde für jede Flugzeit vier mal durchgeführt und die Bilder zu einem gemittelt. Nach der oben beschriebenen Methode wurden dann die $(t_{Flug}^2,\sigma^2)$ Wertepaare aufgetragen und eine Ausgleichsgerade angepasst. in Abbildung \ref{tmot} Sind sowohl die Wertepaare, als auch die Ausgleichsgerade zu sehen.
 \begin{figure}[H]
@@ -221,7 +242,7 @@ Gleiches gilt auch für die Temperatur der Melassephase $ T_{\text{mel}}=584,66 
 \bibitem {anl} Anleitung zum Versuch 4.3: MOT, (Stand 26.06.2017)
 \bibitem {limit} \url{http://steck.us/alkalidata/rubidium85numbers.pdf}, \\(Zugriff: 12.07.2017)
 \bibitem {subdoppler} \url{http://www.iap.tu-darmstadt.de/tqp/grp_kranade/ExpSeminar.pdf}, \\(Zugriff: 12.02.2017)
-
+\bibitem {bsc} Erzeugung ultrakalter atomarer Gase: Realisierung und Anwendungen, Bachelor Arbeit von Marco Ellinghausen, Universität Hamburg, August 2013
 \end{thebibliography} 	
 
 \end{document} 
